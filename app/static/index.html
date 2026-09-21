@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phish Triage</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header>
+  <h1>🎣 Phish Triage</h1>
+  <span class="sub">local phishing email analyzer — nothing leaves your machine except IOC lookups</span>
+</header>
+
+<main>
+  <section id="dropzone" class="card drop">
+    <p><strong>Drop .eml file(s) or a whole folder here</strong> — or click to browse, or paste raw email source below.</p>
+    <input type="file" id="fileInput" accept=".eml,.txt,.msg" multiple>
+    <textarea id="rawInput" placeholder="Paste raw email source (headers + body) here..."></textarea>
+    <div class="row">
+      <button id="analyzeBtn" class="primary">Analyze</button>
+      <button id="bulkBtn" class="secondary">Bulk analyze (files/folder)</button>
+      <button id="reportBtn" class="secondary">Full report (Markdown)</button>
+      <span id="status" class="status"></span>
+    </div>
+  </section>
+
+  <section id="bulkSection" class="card hidden">
+    <div class="row" style="justify-content:space-between">
+      <h2 style="margin:0">Bulk results <span id="bulkCount" class="status"></span></h2>
+      <div class="row">
+        <input type="search" id="bulkFilter" placeholder="Filter…">
+        <button id="bulkCsvBtn" class="secondary">Export CSV</button>
+        <button id="bulkClearBtn" class="secondary">Clear</button>
+      </div>
+    </div>
+    <div class="tablewrap">
+      <table id="bulkTable">
+        <thead>
+          <tr>
+            <th data-sort="verdict">Verdict</th>
+            <th data-sort="score">Score</th>
+            <th data-sort="name">File</th>
+            <th data-sort="subject">Subject</th>
+            <th data-sort="from">From</th>
+            <th data-sort="origin_ip">Origin IP</th>
+            <th>Top findings</th>
+          </tr>
+        </thead>
+        <tbody id="bulkBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="results" class="hidden">
+    <div id="verdictCard" class="card verdict">
+      <div id="verdictBadge">—</div>
+      <div id="verdictScore" class="score"></div>
+    </div>
+
+    <div class="card">
+      <h2>Findings</h2>
+      <ul id="findingsList"></ul>
+    </div>
+
+    <div class="card">
+      <h2>Headers &amp; Identity</h2>
+      <table id="headerTable"></table>
+      <div id="authBadges"></div>
+      <h3>Received chain</h3>
+      <ol id="receivedList" class="mono"></ol>
+    </div>
+
+    <div class="card">
+      <h2>IOCs</h2>
+      <h3>URLs</h3><ul id="urlList" class="mono"></ul>
+      <h3>Domains</h3><ul id="domainList" class="mono"></ul>
+      <h3>IPs</h3><ul id="ipList" class="mono"></ul>
+      <h3>Attachments</h3><ul id="attachList" class="mono"></ul>
+    </div>
+
+    <div class="card">
+      <h2>Enrichment</h2>
+      <div id="tiStatus" class="status"></div>
+      <div id="enrichment" class="status">Click "Enrich IOCs" to check URLhaus / VirusTotal / AbuseIPDB.</div>
+      <button id="enrichBtn" class="secondary">Enrich IOCs</button>
+    </div>
+
+    <details class="card">
+      <summary><h2 style="display:inline">Markdown report</h2></summary>
+      <textarea id="reportBox" class="mono" rows="16" readonly></textarea>
+    </details>
+  </section>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

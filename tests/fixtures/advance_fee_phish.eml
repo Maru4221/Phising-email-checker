@@ -1,0 +1,147 @@
+Delivered-To: victim@example.com
+Received: by 2002:a05:6850:f80b:b0:79c:9328:3f28 with SMTP id kg11csp807886nnb;
+        Wed, 2 Sep 2026 21:38:28 -0700 (PDT)
+X-Forwarded-Encrypted: i=2; AKwUvBwoRltX9DOR5sGy0K6+biYZZuqT7Er5cIVNdkRWBqDSTN73W8JMKU5czIZXieTvGSpwQO3BMnM/uS3wfGJfitQ3tUI=@gmail.com
+X-Received: by 2002:a05:6a00:f9b:b0:857:7337:5db7 with SMTP id d2e1a72fcca58-85ed98bcd79mr13732407b3a.21.1788410308416;
+        Wed, 02 Sep 2026 21:38:28 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1788410308; cv=none;
+        d=google.com; s=arc-20260327;
+        b=TOZWRamzVWrZitR75KqJoUSMvR7ZuIxn9k6+Xbez+U1naBl4KwoTpJMYj1yoNgn7GD
+         YgLFNNtT/WDYdIu5FST9bp5Yvcwz4oO0ZdYIPiV0a6Hl5pCkNQnI121E2V4tcf6pZCYo
+         P906nVPyfvQIvTgCCNhQPnucwbGuN9zL4pnjBxLvEjtOWWjMaINNQvajgjO3HVZN9uiu
+         DEqE27GYGQaAb6JLvn+BV/5iwau8UjE01yHYRovNNdQAHJ2z3Ug8M7FDxFSnDWtOdIS6
+         UFAhvpxI6dRTg5qmLUXRYeYdHkoq0hpa6CuXJ4uA2iWUK5EaJbSJzmQ9dwOduJhA8554
+         pe6g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=reply-to:date:from:to:subject:content-description
+         :content-transfer-encoding:mime-version:message-id:ironport-hdrordr
+         :ironport-data:ironport-sdr;
+        bh=Ijr2g24qbdklEgrE01JW77cxj9BpezQyuDKE/B0TtUc=;
+        fh=T2AUwUP1AAgfi45N+UGBN5sU29AzAK6WMq1AWnXyShg=;
+        b=Zir5h6kJV0LyrKw4Rm4Hulsw37DUPwTSb95Yofi9wGcHJQqlZHcGthWH/N/43o9Fzc
+         imQyRxy8iVekTmGfHwPi0d6qZvQlzarZ/ZOHQChW5VXFevaitxR/A8vWCtIbGYtCO1IK
+         eQOjW4ED+STB/4xqGJlJQJzgcRMP+837tsumOJxinz4cioH040hApDWdZIE84/pk/5FV
+         QADobOXtmdS1FFrR1RiRq948NXaO8KNMoy+dEoeukGtqmCQMwLo7y/G9bFS6z+3SyI9r
+         D2UN6ermngxkhYljRzARqGc9/mWtejWfGaTwDgZSkv/KiPqA8q75MlZJv/oyfVk2uB7I
+         7MNw==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of ct@digi.com.my designates 116.197.25.112 as permitted sender) smtp.mailfrom=ct@digi.com.my;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=digi.com.my
+Return-Path: <ct@digi.com.my>
+Received: from mx3.digi.com.my (mx3.digi.com.my. [116.197.25.112])
+        by mx.google.com with ESMTPS id d2e1a72fcca58-85db38a6cebsi9952772b3a.53.2026.09.02.21.38.22
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 02 Sep 2026 21:38:28 -0700 (PDT)
+Received-SPF: pass (google.com: domain of ct@digi.com.my designates 116.197.25.112 as permitted sender) client-ip=116.197.25.112;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of ct@digi.com.my designates 116.197.25.112 as permitted sender) smtp.mailfrom=ct@digi.com.my;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=digi.com.my
+X-CSE-ConnectionGUID: ZZn66ts9R82wG/J72U6X8w==
+X-CSE-MsgGUID: +DvbdCp/REqI6Yv4B4weBg==
+Authentication-Results: mx3.digi.com.my; dkim=none (message not signed) header.i=none; spf=SoftFail smtp.mailfrom=ct@digi.com.my; spf=None smtp.helo=postmaster@[141.98.9.34]
+Received-SPF: SoftFail (mx3.digi.com.my: domain of ct@digi.com.my
+  is inclined to not designate 41.175.19.6 as permitted sender)
+  identity=mailfrom; client-ip=41.175.19.6;
+  receiver=mx3.digi.com.my; envelope-from="ct@digi.com.my";
+  x-sender="ct@digi.com.my"; x-conformance=spf_only;
+  x-record-type="v=spf1"; x-record-text="v=spf1
+  ip4:23.251.232.11 ip4:23.251.232.7 ip4:52.139.234.228
+  ip4:40.119.207.82 ip4:115.164.5.49 ip4:203.92.129.27
+  ip4:116.197.25.112 ip4:116.197.25.113 ip4:198.21.3.77
+  ip4:149.72.80.177 include:spf.protection.outlook.com
+  include:spf_c.oraclecloud.com ~all"
+Received-SPF: None (mx3.digi.com.my: no sender authenticity
+  information available from domain of
+  postmaster@[141.98.9.34]) identity=helo;
+  client-ip=41.175.19.6; receiver=mx3.digi.com.my;
+  envelope-from="ct@digi.com.my";
+  x-sender="postmaster@[141.98.9.34]"; x-conformance=spf_only
+X-Ironport-Dmarc-Check-Result: validskip
+IronPort-SDR: 6a9869f3_cl2XEcWYYUdcuhDLT9juF4O7Uez2Gk5St/Fqp9bHwSByFmw
+ It2uT2DpUdIktLLFNOpd5dG5t6h8E0eun/wosmg==
+IronPort-Data: A9a23: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
+ x6J
+IronPort-HdrOrdr: A9a23:W5lZsq8KZ2keaYnvfZ9uk+DCI+orL9Y04lQ7vn2YgHRuHvBw8P
+ rCoB1773TJYVkqOE3I9ergBEDiexnhHPdOiOEs1NGZLWrbUQCTQ72Kg7GN/wHd
+X-Talos-CUID: 9a23:ndqBIW5e3tByWjTaVdssxnwSRJ45aSznnC3PDAiaVjxUFo3FVgrF
+X-Talos-MUID: 9a23:nmeetQn6GXkEoyrsIQLLdnohGNli74+2T3ogiLRYitfYH3BvNh2S2WE=
+X-IronPort-AV: E=Sophos;i="6.25,258,1779120000"; 
+   d="scan'208";a="410577050"
+Message-Id: <0f390a$c7hq4q@mx3.digi.com.my>
+Received: from unknown (HELO [141.98.9.34]) ([41.175.19.6])
+  by mx3.digi.com.my with ESMTP; 03 Sep 2026 02:24:37 +0800
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Your compensation money approved.
+To: Recipients <ct@digi.com.my>
+From: "John McConnnell" <ct@digi.com.my>
+Date: Wed, 02 Sep 2026 11:24:32 -0700
+Reply-To: mailjohnmcconnell@gmail.com
+
+
+ Dear beneficiary,
+This is the last time after several attempts to reach across to you for the=
+ sole purpose of handing over to you the sum of 5.7 million USD compensatio=
+n funds. This compensation fund is made available by the UN & AU joint coll=
+aboration. =
+
+The compensation is processed and ready loaded in a special ATM card. This =
+card will be delivered to you as soon as we have your reply with your recon=
+firmed personal details. Reconfirm your details, to avoid card dispatch err=
+or by the courier. Your details needed are;
+FULL NAME:
+TELEPHONE#:
+HOME ADDRESS:
+AGE:
+OCCUPATION:
+Thank you in advance.
+John McConnnell,
+UN appointed Special Envoy on Injustice & Compensation.
+T: + 1 202 750 4705
